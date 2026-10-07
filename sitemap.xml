@@ -2,4 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://jobface.wezzik.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://jobface.wezzik.com/blog/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jobface.wezzik.com/resume-photo/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jobface.wezzik.com/professional-headshot/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jobface.wezzik.com/resume-builder/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jobface.wezzik.com/resume-templates/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jobface.wezzik.com/blog/how-to-choose-a-resume-photo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jobface.wezzik.com/blog/professional-headshot-vs-resume-photo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jobface.wezzik.com/blog/resume-layout-guide/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>
