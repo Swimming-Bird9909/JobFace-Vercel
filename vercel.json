@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "outputDirectory": ".",
   "cleanUrls": false,
   "trailingSlash": true,
   "routes": [
