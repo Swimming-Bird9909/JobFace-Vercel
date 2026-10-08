@@ -1,13 +1,15 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JobFace｜Free Resume Photos, Headshots and Resume Templates</title>
-  <meta name="description" content="Create a professional resume photo, job-search headshot and polished resume for free. No sign-up required to get started.">
+  <title>Free Resume Photo Maker, Headshots & Resume Builder | JobFace</title>
+  <meta name="description" content="Create a free resume photo, professional headshot and polished resume online. No sign-up required for JobFace basic tools.">
+  <meta name="author" content="JobFace">
+  <meta name="theme-color" content="#ff6b35">
   <link rel="canonical" href="https://jobface.wezzik.com/">
-  <meta property="og:title" content="JobFace｜Free Resume Photos, Headshots and Resume Templates">
-  <meta property="og:description" content="Create professional job-search materials in minutes, with free templates and no sign-up required to try.">
+  <meta property="og:title" content="Free Resume Photo Maker, Headshots & Resume Builder | JobFace">
+  <meta property="og:description" content="Create a free resume photo, professional headshot and polished resume online. No sign-up required for basic tools.">
   <meta property="og:url" content="https://jobface.wezzik.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="JobFace">
@@ -76,6 +78,15 @@
         </div>
       </section>
 
+      <section id="explore" class="section">
+        <div class="section-head"><div><div class="section-kicker">EXPLORE JOBFACE</div><h2>Free tools for your job search</h2></div><p class="section-intro">Use a focused page for the task you need: a resume photo, a professional headshot, a resume builder or a ready-to-use template.</p></div>
+        <div class="tool-grid">
+          <a class="tool" href="/resume-photo/" style="text-decoration:none;color:inherit"><div class="tool-icon">◉</div><h3>Free resume photo maker</h3><p>Crop and resize a clear photo for a resume or job platform.</p><div class="tool-foot"><span class="free">No sign-up</span><span>Open tool →</span></div></a>
+          <a class="tool blue" href="/professional-headshot/" style="text-decoration:none;color:inherit"><div class="tool-icon">✦</div><h3>Professional headshot</h3><p>Prepare a natural headshot for LinkedIn and recruiting profiles.</p><div class="tool-foot"><span class="free">Free to try</span><span>Read the guide →</span></div></a>
+          <a class="tool" href="/resume-builder/" style="text-decoration:none;color:inherit"><div class="tool-icon">▤</div><h3>Free resume builder</h3><p>Organize your profile, experience, education and skills.</p><div class="tool-foot"><span class="free">Download basic version</span><span>Start writing →</span></div></a>
+        </div>
+      </section>
+
       <section id="templates" class="section">
         <div class="section-head"><div><div class="section-kicker" data-i18n="freeTemplates">免费模板</div><h2 data-i18n="templatesTitle">先挑一个适合你的样子</h2></div><p class="section-intro" data-i18n="templatesIntro">按求职场景准备的模板，免费版也能完成和下载。</p></div>
         <div class="template-grid">
@@ -95,7 +106,7 @@
 
   <dialog id="modal"><div class="modal"><button class="modal-close" onclick="closeModal()">×</button><div id="modal-content"></div></div></dialog>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"JobFace","url":"https://jobface.wezzik.com/","description":"Free tools for professional resume photos, job-search headshots and resume templates.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"Organization","name":"JobFace","url":"https://jobface.wezzik.com/"},{"@type":"WebSite","name":"JobFace","url":"https://jobface.wezzik.com/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JobFace","item":"https://jobface.wezzik.com/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use JobFace without signing up?","acceptedAnswer":{"@type":"Answer","text":"Yes. Basic resume photos, headshots and resume layout tools can be tried without an account."}},{"@type":"Question","name":"Are uploaded photos public?","acceptedAnswer":{"@type":"Answer","text":"No. Photos are not publicly displayed."}}]}
+  {"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"JobFace","url":"https://jobface.wezzik.com/","description":"Free tools for professional resume photos, job-search headshots and resume templates.","applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Free resume photo maker","Professional headshot guide","Basic resume builder","Resume templates"]},{"@type":"Organization","name":"JobFace","url":"https://jobface.wezzik.com/"},{"@type":"WebSite","name":"JobFace","url":"https://jobface.wezzik.com/","inLanguage":"en"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"JobFace","item":"https://jobface.wezzik.com/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I use JobFace without signing up?","acceptedAnswer":{"@type":"Answer","text":"Yes. Basic resume photos, professional headshots and resume layout tools can be tried without an account."}},{"@type":"Question","name":"Are uploaded photos public?","acceptedAnswer":{"@type":"Answer","text":"No. JobFace does not publicly display your uploaded photos."}},{"@type":"Question","name":"What can I create with JobFace?","acceptedAnswer":{"@type":"Answer","text":"You can prepare a resume photo, a professional job-search headshot, a basic resume and a resume template starting point."}}]}
   ]}
   </script>
   <script>
@@ -131,7 +142,7 @@
     function renderLanguages(){langMenu.innerHTML=languages.map(([code,native,english])=>'<button class="language-option" data-code="'+code+'" onclick="setLanguage(\''+code+'\')"><span>'+native+'</span><small>'+english+'</small></button>').join('')}
     function toggleLanguages(){langMenu.hidden=!langMenu.hidden}
     function setLanguage(code){const selected=copy[code]||baseCopy;document.documentElement.lang=code;localStorage.setItem('zhimian-language',code);document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(selected[key]||baseCopy[key])el.textContent=selected[key]||baseCopy[key]});document.querySelectorAll('.cv-block').forEach(el=>{el.dataset.title=el.classList.contains('short')?t('sectionSkills'):el.classList.contains('compact')?t('sectionCore'):t('sectionProject')});document.querySelectorAll('.language-option').forEach(el=>el.classList.toggle('active',el.dataset.code===code));langMenu.hidden=true;track('language_select',{language:code})}
-    renderLanguages(); setLanguage(localStorage.getItem('zhimian-language')||'zh-CN'); document.addEventListener('click',e=>{if(!e.target.closest('.language-wrap'))langMenu.hidden=true});
+    renderLanguages(); setLanguage(localStorage.getItem('zhimian-language')||'en'); document.addEventListener('click',e=>{if(!e.target.closest('.language-wrap'))langMenu.hidden=true});
     let selectedFile=null, processedUrl=null;
     function openModal(type){
       if(type==='login') content.innerHTML='<h2>登录后，免费保存你的作品</h2><p>登录功能将在接入账号服务后开放。当前无需登录，也可以完整试用并下载基础结果。</p><div class="dropzone"><strong>登录增强即将开放</strong><span>保存历史作品、更多模板、更快处理速度</span></div><button class="primary" onclick="closeModal()">先免费试用</button>';
