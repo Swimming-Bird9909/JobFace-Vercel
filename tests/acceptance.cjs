@@ -9,7 +9,7 @@ const base = process.env.JOBFACE_TEST_URL || 'http://127.0.0.1:4173';
 const root = path.resolve(__dirname, '..');
 const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(x => new URL(x[1]).pathname);
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, ...(process.env.JOBFACE_TEST_PROXY ? { proxy: { server: process.env.JOBFACE_TEST_PROXY } } : {}) });
   try {
     const nojs = await browser.newContext({ javaScriptEnabled: false });
     await previewTransport(nojs, base);
