@@ -1,0 +1,11 @@
+.openai
+.git
+reports
+tests
+scripts
+node_modules
+test-results
+README.md
+.env*
+public
+avatar-*.png

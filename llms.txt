@@ -1,26 +1,28 @@
 # JobFace
 
-JobFace is a web tool for job seekers. It provides a free resume photo maker, professional headshot guidance, a basic resume builder, and resume template starting points.
+> Free browser-based photo cropping and a basic resume builder. Canonical website: https://jobface.wezzik.com/
 
-## Primary pages
+## Current capabilities
+- Center-crop an existing JPG, PNG or WebP into a 720 × 720 or 1080 × 1350 JPG. File limit: 20 MB; decoded image limit: 60 megapixels.
+- Build one text-only, single-column HTML resume. PDF is available through the browser's print function, not a direct export.
+- Process photo and resume inputs locally in the browser. No account or paid plan.
 
-- Home: https://jobface.wezzik.com/
-- Free resume photo maker: https://jobface.wezzik.com/resume-photo/
-- Professional headshot: https://jobface.wezzik.com/professional-headshot/
-- Free resume builder: https://jobface.wezzik.com/resume-builder/
-- Resume templates: https://jobface.wezzik.com/resume-templates/
-- Career guides: https://jobface.wezzik.com/blog/
+## Limits
+No AI face generation, background replacement, retouching, cloud saving, direct PDF/DOCX export, ATS scoring or guaranteed hiring outcomes. Four illustrated layouts are examples, not four downloadable templates. Regional advice is scoped and sourced in the guides.
 
-## Editorial topics
+## Pages
+- [Home](https://jobface.wezzik.com/)
+- [resume-photo](https://jobface.wezzik.com/resume-photo/)
+- [professional-headshot](https://jobface.wezzik.com/professional-headshot/)
+- [resume-builder](https://jobface.wezzik.com/resume-builder/)
+- [resume-templates](https://jobface.wezzik.com/resume-templates/)
+- [blog](https://jobface.wezzik.com/blog/)
+- [how-to-choose-a-resume-photo](https://jobface.wezzik.com/blog/how-to-choose-a-resume-photo/)
+- [professional-headshot-vs-resume-photo](https://jobface.wezzik.com/blog/professional-headshot-vs-resume-photo/)
+- [resume-layout-guide](https://jobface.wezzik.com/blog/resume-layout-guide/)
+- [how-to-write-a-resume-summary](https://jobface.wezzik.com/blog/how-to-write-a-resume-summary/)
+- [ats-resume-keywords](https://jobface.wezzik.com/blog/ats-resume-keywords/)
+- [about](https://jobface.wezzik.com/about/)
+- [privacy](https://jobface.wezzik.com/privacy/)
 
-- Choosing a clear and job-appropriate resume photo
-- Professional headshot versus resume photo
-- One-page resume layout
-- Writing a concise resume summary
-- Using ATS resume keywords truthfully
-
-## Product facts
-
-- Basic tools can be tried without signing up.
-- The site offers downloadable basic results for resume photos and resumes.
-- Users should keep important information as normal text so recruiters and assistive technologies can read it.
+This file is a discovery aid, not a ranking signal or a guarantee that an AI system will cite the website.

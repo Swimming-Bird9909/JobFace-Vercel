@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jobface.wezzik.com/</loc><lastmod>2026-10-08</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/</loc><lastmod>2026-10-08</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://jobface.wezzik.com/resume-photo/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://jobface.wezzik.com/professional-headshot/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://jobface.wezzik.com/resume-builder/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://jobface.wezzik.com/resume-templates/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/how-to-choose-a-resume-photo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/professional-headshot-vs-resume-photo/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/resume-layout-guide/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/how-to-write-a-resume-summary/</loc><lastmod>2026-10-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://jobface.wezzik.com/blog/ats-resume-keywords/</loc><lastmod>2026-10-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jobface.wezzik.com/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/resume-photo/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/professional-headshot/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/resume-builder/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/resume-templates/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/how-to-choose-a-resume-photo/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/professional-headshot-vs-resume-photo/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/resume-layout-guide/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/how-to-write-a-resume-summary/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/blog/ats-resume-keywords/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/about/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://jobface.wezzik.com/privacy/</loc><lastmod>2026-10-08</lastmod></url>
 </urlset>

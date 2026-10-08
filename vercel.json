@@ -3,8 +3,7 @@
   "outputDirectory": ".",
   "cleanUrls": false,
   "trailingSlash": true,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "headers": [
+    { "source": "/404.html", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }
   ]
 }
