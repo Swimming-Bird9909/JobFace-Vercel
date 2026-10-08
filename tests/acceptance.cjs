@@ -46,8 +46,11 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     const p = await mobile.newPage();
     const errors = [], external = [];
     p.on('pageerror', e => errors.push(e.message));
-    p.on('request', req => { if (/^https?:/.test(req.url()) && !req.url().startsWith(base)) external.push(req.url()); });
-    await p.goto(base + '/');
+    p.on('request', req => {
+      const previewToolbar = process.env.JOBFACE_PREVIEW_AUTH === '1' && req.method() === 'GET' && req.url().startsWith('https://vercel.live/');
+      if (/^https?:/.test(req.url()) && !req.url().startsWith(base) && !previewToolbar) external.push(req.url());
+    });
+    await p.goto(base + '/', { waitUntil: 'domcontentloaded' });
     await p.evaluate(() => { window.testEvents = []; window.jobfaceTrack = (event, values) => window.testEvents.push({ event, values }); });
     assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '手机横向溢出');
     await p.getByRole('link', { name: 'Crop my photo →', exact: true }).click();
@@ -91,7 +94,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     fs.mkdirSync(path.join(root, 'test-results'), { recursive: true });
     await p.screenshot({ path: path.join(root, 'test-results/mobile-home.png'), fullPage: true });
     for (const url of ['/resume-photo/', '/resume-templates/', '/blog/ats-resume-keywords/']) {
-      await p.goto(base + url);
+      await p.goto(base + url, { waitUntil: 'domcontentloaded' });
       assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), url + ' 手机横向溢出');
     }
     console.log('通过：手机两种照片下载、坏图片提示、简历实际下载与转义、可选字段、语言切换、无输入外传、事件参数白名单');
@@ -101,7 +104,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     await previewTransport(analytics, base);
     await analytics.route('**/assets/analytics-config.js', route => route.fulfill({ contentType: 'text/javascript', body: "window.JOBFACE_ANALYTICS={measurementId:'G-TESTONLY'};" }));
     await analytics.route('https://www.googletagmanager.com/**', route => route.fulfill({ body: '' }));
-    const ap = await analytics.newPage(); await ap.goto(base + '/?private=do-not-send');
+    const ap = await analytics.newPage(); await ap.goto(base + '/?private=do-not-send', { waitUntil: 'domcontentloaded' });
     assert.equal(await ap.evaluate(() => typeof window.gtag), 'undefined');
     await ap.locator('#analytics-yes').click();
     await ap.evaluate(() => window.jobfaceTrack('resume_download', { tool: 'resume', name: 'secret', contact: 'secret' }));
