@@ -20,6 +20,8 @@ module.exports = async function setup(context, base) {
   }
   const bypass = cachedBypass;
   if (!bypass) throw new Error('缺少已授权预览测试凭据');
+  // 平台注入的反馈工具栏不属于产品功能，避免其远程资源阻塞页面验收。
+  await context.route('https://vercel.live/**', route => route.abort());
   await context.route(base + '/**', async route => {
     await route.continue({ headers: { ...route.request().headers(), 'x-vercel-protection-bypass': bypass } });
   });

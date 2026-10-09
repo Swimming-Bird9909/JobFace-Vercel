@@ -8,6 +8,12 @@ const previewTransport = require('./preview-transport.cjs');
 const base = process.env.JOBFACE_TEST_URL || 'http://127.0.0.1:4173';
 const root = path.resolve(__dirname, '..');
 const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(x => new URL(x[1]).pathname);
+async function visit(page, url) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try { return await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 20000 }); }
+    catch (error) { if (attempt === 2) throw error; }
+  }
+}
 (async () => {
   const browser = await chromium.launch({ headless: true, ...(process.env.JOBFACE_TEST_PROXY ? { proxy: { server: process.env.JOBFACE_TEST_PROXY } } : {}) });
   try {
@@ -15,7 +21,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     await previewTransport(nojs, base);
     const page = await nojs.newPage();
     for (const url of urls) {
-      const response = await page.goto(base + url);
+      const response = await visit(page, base + url);
       assert.equal(response.status(), 200, url);
       assert.equal(await page.locator('h1').count(), 1, url);
       assert.equal(await page.locator('html').getAttribute('lang'), 'en');
@@ -32,10 +38,10 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
       }
     }
     for (const url of ['/missing-jobface-check-999/', '/resume-photo/not-a-page/', '/random-missing.html']) {
-      const response = await page.goto(base + url); assert.equal(response.status(), 404, url);
+      const response = await visit(page, base + url); assert.equal(response.status(), 404, url);
       assert(await page.getByRole('link', { name: 'Return to JobFace home' }).count());
     }
-    await page.goto(base + '/');
+    await visit(page, base + '/');
     const faq = await page.locator('script[type="application/ld+json"]').evaluate(el => JSON.parse(el.textContent)['@graph'].find(x => x['@type'] === 'FAQPage'));
     const visibleFaq = await page.locator('#faq details').evaluateAll(els => els.map(el => [el.querySelector('summary').textContent, el.querySelector('p').textContent]));
     assert.deepEqual(faq.mainEntity.map(x => [x.name, x.acceptedAnswer.text]), visibleFaq);
@@ -50,7 +56,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
       const previewToolbar = process.env.JOBFACE_PREVIEW_AUTH === '1' && req.method() === 'GET' && req.url().startsWith('https://vercel.live/');
       if (/^https?:/.test(req.url()) && !req.url().startsWith(base) && !previewToolbar) external.push(req.url());
     });
-    await p.goto(base + '/', { waitUntil: 'domcontentloaded' });
+    await visit(p, base + '/');
     await p.evaluate(() => { window.testEvents = []; window.jobfaceTrack = (event, values) => window.testEvents.push({ event, values }); });
     assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), '手机横向溢出');
     await p.getByRole('link', { name: 'Crop my photo →', exact: true }).click();
@@ -94,7 +100,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     fs.mkdirSync(path.join(root, 'test-results'), { recursive: true });
     await p.screenshot({ path: path.join(root, 'test-results/mobile-home.png'), fullPage: true });
     for (const url of ['/resume-photo/', '/resume-templates/', '/blog/ats-resume-keywords/']) {
-      await p.goto(base + url, { waitUntil: 'domcontentloaded' });
+      await visit(p, base + url);
       assert(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth), url + ' 手机横向溢出');
     }
     console.log('通过：手机两种照片下载、坏图片提示、简历实际下载与转义、可选字段、语言切换、无输入外传、事件参数白名单');
@@ -104,7 +110,7 @@ const urls = [...fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8').matchAl
     await previewTransport(analytics, base);
     await analytics.route('**/assets/analytics-config.js', route => route.fulfill({ contentType: 'text/javascript', body: "window.JOBFACE_ANALYTICS={measurementId:'G-TESTONLY'};" }));
     await analytics.route('https://www.googletagmanager.com/**', route => route.fulfill({ body: '' }));
-    const ap = await analytics.newPage(); await ap.goto(base + '/?private=do-not-send', { waitUntil: 'domcontentloaded' });
+    const ap = await analytics.newPage(); await visit(ap, base + '/?private=do-not-send');
     assert.equal(await ap.evaluate(() => typeof window.gtag), 'undefined');
     await ap.locator('#analytics-yes').click();
     await ap.evaluate(() => window.jobfaceTrack('resume_download', { tool: 'resume', name: 'secret', contact: 'secret' }));
