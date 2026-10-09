@@ -32,7 +32,7 @@ node tests/acceptance.cjs
 
 ## GA4 接入与隐私验收
 
-当前 `assets/analytics-config.js` 的测量编号为空，统计默认不加载。不能将本地事件测试称为 GA4 接入成功。
+`assets/analytics-config.js` 使用用户于 2026-10-09 提供的 JobFace 衡量编号 `G-SN0S9SS55N`；已授权接口列出的 JobFace 属性编号为 `558233977`。统计仅在用户同意后加载。配置完成、请求发送、实时报告接收是三个不同状态，不能将本地事件测试称为 GA4 接入成功。
 
 1. 先授权 Google Analytics 读取权限，列出可访问的数据流。
 2. 核实数据流网站地址确实为 JobFace 正式域名；优先复用已有数据流。
