@@ -23,6 +23,8 @@ async function visit(page, url) {
     for (const url of urls) {
       const response = await visit(page, base + url);
       assert.equal(response.status(), 200, url);
+      assert(!/noindex/i.test(response.headers()['x-robots-tag'] || ''), url + ' 响应头禁止收录');
+      assert(!/noindex/i.test((await page.locator('meta[name="robots"],meta[name="googlebot"]').evaluateAll(els => els.map(el => el.content))).join(' ')), url + ' 页面标记禁止收录');
       assert.equal(await page.locator('h1').count(), 1, url);
       assert.equal(await page.locator('html').getAttribute('lang'), 'en');
       assert.equal(await page.locator('link[rel=canonical]').getAttribute('href'), 'https://jobface.wezzik.com' + url);
@@ -42,6 +44,12 @@ async function visit(page, url) {
       assert(await page.getByRole('link', { name: 'Return to JobFace home' }).count());
     }
     await visit(page, base + '/');
+    // 重要页面必须直接出现在首页原始链接中，不依赖脚本展开或点击弹窗。
+    const homeLinks = await page.locator('main a[href]').evaluateAll(els => els.map(el => el.getAttribute('href')));
+    for (const url of urls.filter(url => url !== '/')) assert(homeLinks.includes(url), '首页缺少发现入口：' + url);
+    assert((await page.locator('h1').innerText()).includes('resume photo cropper'));
+    assert.equal(await page.locator('#output-comparison').count(), 1);
+    assert.equal(await page.locator('#guides article a').count(), 5);
     const faq = await page.locator('script[type="application/ld+json"]').evaluate(el => JSON.parse(el.textContent)['@graph'].find(x => x['@type'] === 'FAQPage'));
     const visibleFaq = await page.locator('#faq details').evaluateAll(els => els.map(el => [el.querySelector('summary').textContent, el.querySelector('p').textContent]));
     assert.deepEqual(faq.mainEntity.map(x => [x.name, x.acceptedAnswer.text]), visibleFaq);
