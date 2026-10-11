@@ -4,6 +4,7 @@
   "cleanUrls": false,
   "trailingSlash": true,
   "headers": [
-    { "source": "/404.html", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] }
+    { "source": "/404.html", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }] },
+    { "source": "/ab3e78f58b8f42225a5c84fc05924555.txt", "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }, { "key": "Content-Type", "value": "text/plain; charset=utf-8" }] }
   ]
 }

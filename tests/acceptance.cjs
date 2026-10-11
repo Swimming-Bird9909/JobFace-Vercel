@@ -23,7 +23,10 @@ async function visit(page, url) {
     for (const url of urls) {
       const response = await visit(page, base + url);
       assert.equal(response.status(), 200, url);
-      assert(!/noindex/i.test(response.headers()['x-robots-tag'] || ''), url + ' 响应头禁止收录');
+      // 平台给受保护的预览加禁止收录标记；正式站必须没有此标记。
+      const preview = process.env.JOBFACE_PREVIEW_AUTH === '1' && /^jobface-.*-qiuliang087-5768s-projects\.vercel\.app$/.test(new URL(base).hostname);
+      if (preview) assert(/noindex/i.test(response.headers()['x-robots-tag'] || ''), url + ' 预览缺少禁止收录保护');
+      else assert(!/noindex/i.test(response.headers()['x-robots-tag'] || ''), url + ' 响应头禁止收录');
       assert(!/noindex/i.test((await page.locator('meta[name="robots"],meta[name="googlebot"]').evaluateAll(els => els.map(el => el.content))).join(' ')), url + ' 页面标记禁止收录');
       assert.equal(await page.locator('h1').count(), 1, url);
       assert.equal(await page.locator('html').getAttribute('lang'), 'en');
