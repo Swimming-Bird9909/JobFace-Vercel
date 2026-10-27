@@ -36,6 +36,7 @@ for (const url of urls) {
   assert.equal(info.headingCount, 1);
   assert.equal(info.keywordCount, 0);
   assert.equal(info.guideCount, 1);
+  if (pathname !== '/') assert(/\bfree\b/i.test(title + ' ' + description + ' ' + info.heading), pathname + ' 缺少 Free 定位词');
   for (const data of info.schemas) {
     for (const node of data['@graph'] || [data]) {
       if (node['@type'] === 'WebPage') {
