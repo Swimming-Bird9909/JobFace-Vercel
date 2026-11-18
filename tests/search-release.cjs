@@ -25,6 +25,9 @@ const paths = [...fs.readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>(.*?)<\/
     const r = get(p); assert.equal(r.status, 200, p);
     if (!process.env.JOBFACE_PREVIEW_AUTH) assert(!/x-robots-tag:.*noindex/i.test(r.head), p);
     const local = fs.readFileSync(p === '/' ? 'index.html' : p.slice(1) + 'index.html', 'utf8');
+    if (p === '/' || p === '/blog/') {
+      assert(r.body.includes('href="/blog/ai-resume-prompts/"'), p + ' 缺少新指南入口');
+    }
     for (const regex of [/<title>.*?<\/title>/s, /<meta name="description"[^>]*>/s, /<section class="search-guide">.*?<\/section>/s, /<script type="application\/ld\+json">.*?<\/script>/s]) {
       assert.equal(r.body.match(regex)?.[0], local.match(regex)?.[0], p + ' 部署内容不一致');
     }
@@ -35,5 +38,5 @@ const paths = [...fs.readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>(.*?)<\/
   assert.equal(sitemap.body.trim(), fs.readFileSync('sitemap.xml','utf8').trim());
   assert(get('/robots.txt').body.includes('Sitemap: https://jobface.wezzik.com/sitemap.xml'));
   assert(get('/assets/analytics-config.js').body.includes('G-SN0S9SS55N'));
-  console.log('通过：13 页已部署文案、真实错误页面、站点地图、抓取规则和统计配置；未执行统计脚本。');
+  console.log(`通过：${paths.length} 页已部署文案、真实错误页面、站点地图、抓取规则和统计配置；未执行统计脚本。`);
 })().catch(e => { console.error(e.message); process.exitCode = 1; });

@@ -52,11 +52,11 @@ async function visit(page, url) {
     for (const url of urls.filter(url => url !== '/')) assert(homeLinks.includes(url), '首页缺少发现入口：' + url);
     assert((await page.locator('h1').innerText()).includes('resume photo cropper'));
     assert.equal(await page.locator('#output-comparison').count(), 1);
-    assert.equal(await page.locator('#guides article a').count(), 5);
+    assert.equal(await page.locator('#guides a[href="/blog/ai-resume-prompts/"]').count(), 1);
     const faq = await page.locator('script[type="application/ld+json"]').evaluate(el => JSON.parse(el.textContent)['@graph'].find(x => x['@type'] === 'FAQPage'));
     const visibleFaq = await page.locator('#faq details').evaluateAll(els => els.map(el => [el.querySelector('summary').textContent, el.querySelector('p').textContent]));
     assert.deepEqual(faq.mainEntity.map(x => [x.name, x.acceptedAnswer.text]), visibleFaq);
-    console.log('通过：13 个页面、禁脚本英文内容、内部链接、结构化数据、3 种错误地址');
+    console.log(`通过：${urls.length} 个页面、禁脚本英文内容、内部链接、结构化数据、3 种错误地址`);
     await nojs.close();
     const mobile = await browser.newContext({ ...devices['iPhone 13'], acceptDownloads: true });
     await previewTransport(mobile, base);

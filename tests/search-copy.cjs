@@ -3,9 +3,11 @@ const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const decode = s => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
-const urls = [...fs.readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(x => x[1]);
+const sitemap = [...fs.readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>(.*?)<\/loc><lastmod>(.*?)<\/lastmod>/g)];
+const guideUrl = 'https://jobface.wezzik.com/blog/ai-resume-prompts/';
+assert(sitemap.some(([, url]) => url === guideUrl), '站点地图缺少新指南');
 const titles = new Set(), descriptions = new Set();
-for (const url of urls) {
+for (const [, url, lastModified] of sitemap) {
   const pathname = new URL(url).pathname;
   const file = pathname === '/' ? 'index.html' : pathname.slice(1) + 'index.html';
   const html = fs.readFileSync(file, 'utf8');
@@ -42,7 +44,7 @@ for (const url of urls) {
       if (node['@type'] === 'WebPage') {
         assert.equal(node.name + ' | JobFace', title);
         assert.equal(node.description, description);
-        assert.equal(node.dateModified, '2026-10-27');
+        assert.equal(node.dateModified, lastModified);
       }
       if (node['@type'] === 'Article') {
         assert.equal(node.headline, info.heading);
@@ -51,5 +53,4 @@ for (const url of urls) {
     }
   }
 }
-assert.equal(urls.length, 13);
-console.log('通过：13 页标题与摘要唯一、分享信息及结构化信息一致、关键词未堆入无效标签。');
+console.log(`通过：${sitemap.length} 页标题与摘要唯一、分享信息及结构化信息一致、关键词未堆入无效标签。`);

@@ -17,6 +17,7 @@ No AI face generation, background replacement, retouching, cloud saving, direct 
 - [resume-builder](https://jobface.wezzik.com/resume-builder/)
 - [resume-templates](https://jobface.wezzik.com/resume-templates/)
 - [blog](https://jobface.wezzik.com/blog/)
+- [Free AI resume prompts](https://jobface.wezzik.com/blog/ai-resume-prompts/): Copyable prompts for ChatGPT, Gemini, and Claude, an evidence-based example, and a free browser-based resume workflow.
 - [how-to-choose-a-resume-photo](https://jobface.wezzik.com/blog/how-to-choose-a-resume-photo/)
 - [professional-headshot-vs-resume-photo](https://jobface.wezzik.com/blog/professional-headshot-vs-resume-photo/)
 - [resume-layout-guide](https://jobface.wezzik.com/blog/resume-layout-guide/)
