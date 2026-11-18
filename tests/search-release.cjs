@@ -26,7 +26,9 @@ const paths = [...fs.readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>(.*?)<\/
     if (!process.env.JOBFACE_PREVIEW_AUTH) assert(!/x-robots-tag:.*noindex/i.test(r.head), p);
     const local = fs.readFileSync(p === '/' ? 'index.html' : p.slice(1) + 'index.html', 'utf8');
     if (p === '/' || p === '/blog/') {
-      assert(r.body.includes('href="/blog/ai-resume-prompts/"'), p + ' 缺少新指南入口');
+      for (const guide of paths.filter(url => url.startsWith('/blog/') && url !== '/blog/')) {
+        assert(r.body.includes(`href="${guide}"`), p + ' 缺少指南入口 ' + guide);
+      }
     }
     for (const regex of [/<title>.*?<\/title>/s, /<meta name="description"[^>]*>/s, /<section class="search-guide">.*?<\/section>/s, /<script type="application\/ld\+json">.*?<\/script>/s]) {
       assert.equal(r.body.match(regex)?.[0], local.match(regex)?.[0], p + ' 部署内容不一致');
